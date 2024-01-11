@@ -4,12 +4,15 @@ import datetime
 import uuid
 
 class PayPay:
-    def __init__(self,proxy:dict=None):
+    def __init__(self,phone:str,password:str,client_uuid:str=None,proxy:dict=None):
         self.proxy=proxy
         self.session = requests.Session()
-        self.uuuid=str(uuid.uuid4())
-        self.phone=input("電話番号: ")
-        self.pas=input("パスワード: ")
+        if client_uuid==None:
+            self.uuuid=str(uuid.uuid4())
+        else:
+            self.uuuid=client_uuid
+        self.phone=phone
+        self.pas=password
         self.headers={
         "Accept":"application/json, text/plain, */*",
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36',
@@ -57,7 +60,7 @@ class PayPay:
                     None
                 try:    
                     token=(login["access_token"])
-                    print("ログイン成功！！")
+                    print(f"ログイン成功！\nuuid: {self.uuuid}")
                 except:
                     if login["response_type"]=="ErrorResponse":
                         return login
@@ -158,7 +161,7 @@ class PayPay:
         reje = self.session.post("https://www.paypay.ne.jp/app/v2/p2p-api/rejectP2PSendMoneyLink",json=rejectj,headers=self.headers,proxies=self.proxy)
         return reje.json()
     
-    def sendmoney(self,kingaku:int,externalid:str) -> dict:
+    def send_money(self,kingaku:int,externalid:str) -> dict:
         sendj = {
             "theme": "default-sendmoney",
             "externalReceiverId": externalid,
@@ -171,11 +174,11 @@ class PayPay:
         send = self.session.post("https://www.paypay.ne.jp/app/v2/p2p-api/executeP2PSendMoney",headers=self.headers,json=sendj,proxies=self.proxy)
         return send.json()
     
-    def createp2pcode(self) -> dict:
+    def create_p2pcode(self) -> dict:
         cp2c = self.session.post("https://www.paypay.ne.jp/app/v1/p2p-api/createP2PCode",headers=self.headers,proxies=self.proxy)
         return cp2c.json()
     
-    def createpaymentotc(self) -> dict:
+    def create_payment_otcfh(self) -> dict:
         cpotcj = {
             "paymentMethodType":"WALLET",
             "paymentMethodId":"106177237",
