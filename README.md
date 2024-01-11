@@ -66,7 +66,7 @@ paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234",client_uuid="d
 これも無効ならS0001かS9999が返ってきます(てきとーなものを入れるとサーバーエラーになる)  
 トークンログインについては1回Twitterでぼそっとつぶやいたのでそれを参考にしといてください  
 #### [Twitter](https://twitter.com/TakeTakaAway/status/1744998645488070877)  
-![1](images/0.jpg)  
+![1](images/0.png)  
 ###### これだけ
 ## コンタクト
 ↓Discordサーバー↓  
