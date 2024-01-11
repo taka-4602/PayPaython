@@ -1,0 +1,2 @@
+# PayPaython
+PythonからPayPay APIを操作するシンプルなAPIラッパー
