@@ -1,7 +1,7 @@
 import PayPaython
 
 #ログイン
-paypay=PayPaython.PayPay()
+paypay=PayPaython.PayPay("08012345678","Test-1234")
 print(paypay)
 #送金リンク受け取り
 print(paypay.receive("osuvUuLmQH8WA4kW"))#ぺいぺい送金リンクの https://pay.paypay.ne.jp/osuvUuLmQH8WA4kW <-ここね
