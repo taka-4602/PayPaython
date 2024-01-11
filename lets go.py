@@ -2,7 +2,6 @@ import PayPaython
 
 #ログイン
 paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234",client_uuid="d2d786a9-6a9f-49e1-9139-ba2f5f7f9f1d",proxy="example.com")
-print(paypay)
 #送金リンク受け取り
 print(paypay.receive("osuvUuLmQH8WA4kW"))#ぺいぺい送金リンクの https://pay.paypay.ne.jp/osuvUuLmQH8WA4kW <-ここね
 #送金リンクを辞退
