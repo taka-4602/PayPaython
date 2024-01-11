@@ -17,7 +17,7 @@ printも消してエラー判定のコードも消しています
 - ```pip install requests``` (PayPayのAPIにリクエストするんだから必須)
 - ```pip install paypaython``` (これ)
 
-この2つをインストールしたらリポジトリにあるlets go.pyからすぐに使い始めることができます！
+この2つをインストールしたらリポジトリにあるlets_go.pyからすぐに使い始めることができます！
 ### lets_go_2.1.0.py
 ```python
 import PayPaython
