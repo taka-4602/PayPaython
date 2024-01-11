@@ -8,23 +8,32 @@ PayPayのサポートに連絡することで早く解除してもらえるみ�
 ## すでにPayPayを操作できるDiscordのBotをデプロイしてます！
 ↓Bot招待リンク↓  
 https://discord.com/api/oauth2/authorize?client_id=1189119988678803496&permissions=8&scope=bot
+## 注意：PayPaython 1.x.x系と2.x.x系は別物です
+APIラッパー側の機能を減らしてユーザー側の自由度を上げたものが2.x.x系です  
+printも消してエラー判定のコードも消しています  
+もし自由度よりもターミナルでちまちまやりたい方は1.x.x系をおすすめします  
+- ```pip install paypaython==1.1.0```
 ## Let's Go!
 - ```pip install requests``` (PayPayのAPIにリクエストするんだから必須)
 - ```pip install paypaython``` (これ)
 
 この2つをインストールしたらリポジトリにあるlets go.pyからすぐに使い始めることができます！
-### lets go.py
+### lets_go_2.1.0.py
 ```python
 import PayPaython
 
 #ログイン
-paypay=PayPaython.PayPay("08012345678","Test-1234")#電話番号とパスワードの他にclient_uuid、プロキシも引数に使えます
+paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234")
+otp=input("SMSの番号: ")
+print(paypay.login(otp))#uuid確認用に["client_uuid"]にわざとuuidくっつけてます
+#送金リンク確認
+print(paypay.check_link("osuvUuLmQH8WA4kW"))
 #送金リンク受け取り
-print(paypay.receive("osuvUuLmQH8WA4kW"))#ぺいぺい送金リンクの https://pay.paypay.ne.jp/osuvUuLmQH8WA4kW <-ここね
+print(paypay.receive("osuvUuLmQH8WA4kW"))#ぺいぺい送金リンクの https://pay.paypay.ne.jp/osuvUuLmQH8WA4kW <-ここね #パスワードはpassword=int
 #送金リンクを辞退
 print(paypay.reject("osuvUuLmQH8WA4kW"))
 #送金リンクを作成
-print(paypay.create_link(kingaku=1,password=1111))
+print(paypay.create_link(kingaku=1,password=1111))#パスワードはpassword=int
 #残高確認
 print(paypay.balance())
 #ユーザー情報
