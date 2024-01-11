@@ -5,6 +5,9 @@ PythonからPayPay APIを操作するシンプルで使いやすいAPIラッパ�
 PayPayのサポートに連絡することで早く解除してもらえるみたいです(めんどくさいけど)
 ### セッションを作りすぎない
 セッションを大量に作るとアカウント凍結の可能性があるみたいです
+## すでにPayPayを操作できるDiscordのBotをデプロイしてます！
+↓Bot招待リンク↓  
+https://discord.com/api/oauth2/authorize?client_id=1189119988678803496&permissions=8&scope=bot
 ## Let's Go!
 - ```pip install requests``` (PayPayのAPIにリクエストするんだから必須)
 - ```pip install paypaython``` (これ)
@@ -57,3 +60,16 @@ paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234",client_uuid="d
 ### アクセストークンについて
 2時間ほどで失効します  
 失効したら再ログインしてトークンを再発行する必要があります  
+実はこのログイン方法以外にトークンログインすることもできます  
+そっちの方は特に公開するつもりはないです(ただクッキーにトークンつけるだけ...)  
+トークンはクッキーにくっついてるのでセッション開始時に有効なトークンをくっつけてあげてください  
+これも無効ならS0001かS9999が返ってきます(てきとーなものを入れるとサーバーエラーになる)  
+トークンログインについては1回Twitterでぼそっとつぶやいたのでそれを参考にしといてください  
+#### [Twitter](https://twitter.com/TakeTakaAway/status/1744998645488070877)  
+![1](images/0.jpg)  
+###### これだけ
+## コンタクト
+↓Discordサーバー↓  
+https://discord.gg/X5SNVYtRPR  
+↑にてPayPayで寄付してくれると超嬉しいです！！
+## このAPIラッパーをPayPay詐欺とかいうクソしょーもないことに使わないでください。
