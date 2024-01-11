@@ -89,7 +89,7 @@ class PayPay:
         clink = {
         
             "androidMinimumVersion": "3.45.0",
-            "requestId": str(uuid.uuid4())(),
+            "requestId": str(uuid.uuid4()),
             "requestAt": datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).strftime('%Y-%m-%dT%H:%M:%S+0900'),
             "theme": "default-sendmoney",
             "amount": kingaku,
