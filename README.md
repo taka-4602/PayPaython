@@ -27,8 +27,8 @@ printも消してエラー判定のコードも消しています
 import PayPaython
 
 #ログイン
-paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234")#token="str"トークンをセットするとログインをパスできます
-otp=input(f"SMSの番号：{paypay.pre}-")
+paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234")#ログイン済みclient_uuid="str"をセットするとOTPをパスできます #token="str"トークンをセットするとログインをパスします
+otp=input(f"SMSに届いた番号:{paypay.pre}-")
 print(paypay.login(otp))#uuid確認用に["client_uuid"]にわざとuuidくっつけてます
 #送金リンク確認
 print(paypay.check_link("osuvUuLmQH8WA4kW"))#ぺいぺい送金リンクの https://pay.paypay.ne.jp/osuvUuLmQH8WA4kW <-ここね
@@ -49,7 +49,7 @@ print(paypay.payment_method())
 #取引履歴
 print(paypay.history())
 #指定したexternalidのユーザーに直接送金
-print(paypay.send_money(kingaku=1,externalid="048f4fef00bdbad00"))#このidはてきとーです
+print(paypay.send_money(kingaku=1,external_id="048f4fef00bdbad00"))#このidはてきとーです
 #送金してもらうためのURLを作成する(PayPayアプリのQRコードとおなじ)
 print(paypay.create_p2pcode())
 #支払いのワンタイムコードを作成する
@@ -64,7 +64,7 @@ paypay=PayPaython.PayPay("08012345678","Test-1234")
 ```
 上のログイン部分にはあとclient_uuidとトークンとプロキシを引数に使えます  
 ```python
-paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234",client_uuid="d2d786a9-6a9f-49e1-9139-ba2f5f7f9f1d",token="とてもながい",proxy={"http":"http://example.com"})
+paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234",client_uuid="d2d786a9-6a9f-49e1-9139-ba2f5f7f9f1d",token="とてもながい==",proxy={"http":"http://example.com"})
 ```
 ###### 引数全体としてはこんなカンジ
 ログイン済みのuuidを使うとSMSに届く認証番号を入力しなくてもログインできます！  
@@ -92,13 +92,13 @@ print(paypay.token)
 ### もう少し知る
 ```paypay.pre```
 - ワンタイムパスワードの接頭語  
-  TA-4602のTAの部分
+  TA-4602の"TA"の部分
   
 ```paypay.uuuid```
 - ふつうにuuid  
   ログインの返り値につけたものとおんなじ  
-  他にもphoneとかpasswordもあるけどこれはユーザー自身が入力してるので役目なし  
-  headersとかもあるけどユーザー側は特に使わないので役目なし
+  他にも.phoneとか.passwordもあるけどこれはユーザー自身が入力してるので役目なし  
+  .refidとかもあるけどユーザー側は特に使わないので役目なし
 
 ## コンタクト
 ↓Discordサーバー↓  
