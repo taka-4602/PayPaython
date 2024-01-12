@@ -81,7 +81,13 @@ paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234",client_uuid="d
 PayPaython2.2.0でトークンログイン機能がつきました  
 #### [Twitter](https://twitter.com/TakeTakaAway/status/1744998645488070877)  
 ![1](images/0.png)  
-###### これだけ
+###### これだけ  
+え、トークンがわからないって...？
+そんなあなたに
+```python
+print(paypay.token)
+```
+よくできてるでしょ
 ## コンタクト
 ↓Discordサーバー↓  
 https://discord.gg/X5SNVYtRPR  
