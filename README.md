@@ -28,7 +28,7 @@ import PayPaython
 
 #ログイン
 paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234")#token="str"トークンをセットするとログインをパスできます
-otp=input("SMSの番号: ")
+otp=input(f"SMSの番号：{paypay.pre}-")
 print(paypay.login(otp))#uuid確認用に["client_uuid"]にわざとuuidくっつけてます
 #送金リンク確認
 print(paypay.check_link("osuvUuLmQH8WA4kW"))#ぺいぺい送金リンクの https://pay.paypay.ne.jp/osuvUuLmQH8WA4kW <-ここね
