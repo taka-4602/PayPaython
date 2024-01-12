@@ -88,6 +88,17 @@ PayPaython2.2.0でトークンログイン機能がつきました
 print(paypay.token)
 ```
 よくできてるでしょ
+### もう少し知る
+```paypay.pre```
+- ワンタイムパスワードの接頭語
+  TA-1234のTAの部分
+  
+```paypay.uuuid```
+- uuid
+  ログインの返り値についてるものとおんなじ  
+  他にもphoneとかpasswordもあるけどこれはユーザー自身が入力してるので役目なし  
+  headersとかもあるけどユーザー側は特に使わないので役目なし
+
 ## コンタクト
 ↓Discordサーバー↓  
 https://discord.gg/X5SNVYtRPR  
