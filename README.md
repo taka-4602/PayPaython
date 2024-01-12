@@ -83,7 +83,7 @@ PayPaython2.2.0でトークンログイン機能がつきました
 #### [Twitter](https://twitter.com/TakeTakaAway/status/1744998645488070877)  
 ![1](images/0.png)  
 ###### これだけ  
-え、トークンがわからないって...？
+え、トークンがわからないって...？  
 そんなあなたに
 ```python
 print(paypay.token)
