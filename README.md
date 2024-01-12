@@ -94,7 +94,7 @@ print(paypay.token)
   TA-1234のTAの部分
   
 ```paypay.uuuid```
-- uuid
+- ふつうにuuid  
   ログインの返り値についてるものとおんなじ  
   他にもphoneとかpasswordもあるけどこれはユーザー自身が入力してるので役目なし  
   headersとかもあるけどユーザー側は特に使わないので役目なし
