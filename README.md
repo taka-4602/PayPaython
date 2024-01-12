@@ -1,5 +1,6 @@
 # PayPaython
-PythonからPayPay APIを操作するシンプルで使いやすいAPIラッパー
+PythonからPayPay APIを操作するシンプルで使いやすいAPIラッパー  
+### >> ```pip install paypaython``` <<
 ## 始める前に確認すること
 ### ログインを3回失敗するとアカウントが一時ロックされる
 PayPayのサポートに連絡することで早く解除してもらえるみたいです(めんどくさいけど)
