@@ -3,11 +3,11 @@ import PayPaython
 #ログイン
 paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234")
 #送金リンク確認
-print(paypay.check_link("osuvUuLmQH8WA4kW"))
+print(paypay.check_link("osuvUuLmQH8WA4kW"))#ぺいぺい送金リンクの https://pay.paypay.ne.jp/osuvUuLmQH8WA4kW <-ここね
 #送金リンク受け取り
-print(paypay.receive("osuvUuLmQH8WA4kW"))#ぺいぺい送金リンクの https://pay.paypay.ne.jp/osuvUuLmQH8WA4kW <-ここね #パスワードはpassword=int
+print(paypay.receive("osuvUuLmQH8WA4kW"))#パスワードはpassword=int #事前にcheck_linkして返ってきたdictを引数infoに入れるとそのdictを使うようになります
 #送金リンクを辞退
-print(paypay.reject("osuvUuLmQH8WA4kW"))
+print(paypay.reject("osuvUuLmQH8WA4kW"))#これもinfoにdictつっこめる
 #送金リンクを作成
 print(paypay.create_link(kingaku=1,password=1111))#パスワードはpassword=int
 #残高確認
