@@ -16,7 +16,7 @@ https://discord.com/api/oauth2/authorize?client_id=1189119988678803496&permissio
 APIラッパー側の機能を減らしてユーザー側の自由度を上げたものが2.x.x系です  
 printも消してエラー判定のコードも消しています  
 もし自由度よりもターミナルでちまちまやりたい方は1.x.x系をおすすめします  
-- ```pip install paypaython==1.1.1```
+- ```pip install paypaython==1.1.2```
 ## Let's Go!
 - ```pip install requests``` (PayPayのAPIにリクエストするんだから必須)
 - ```pip install paypaython``` (これ)
