@@ -18,7 +18,7 @@ printも消してエラー判定のコードも消しています
 - ```pip install paypaython``` (これ)
 
 この2つをインストールしたらリポジトリにあるlets_go.pyからすぐに使い始めることができます！
-### lets_go_2.1.0.py
+### lets_go_2.x.x.py
 ```python
 import PayPaython
 
