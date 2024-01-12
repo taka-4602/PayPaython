@@ -57,13 +57,13 @@ print(paypay.create_payment_otcfh())
 いちおう#コメントで大まかな使い方は記載してます  
 大まか...ですがほんとうにこれだけです、とってもシンプル  
 send_moneyで使うexternal_idはuser_infoにくっついてきます
-### すでにログイン済みのclient_uuidでログイン
+### すでにログイン済みのclient_uuid or トークンでログイン
 ```python
 paypay=PayPaython.PayPay("08012345678","Test-1234")
 ```
-上のログイン部分にはあとclient_uuidとプロキシを引数に使えます  
+上のログイン部分にはあとclient_uuidとトークンとプロキシを引数に使えます  
 ```python
-paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234",client_uuid="d2d786a9-6a9f-49e1-9139-ba2f5f7f9f1d",proxy="example.com")
+paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234",client_uuid="d2d786a9-6a9f-49e1-9139-ba2f5f7f9f1d",token="とてもながい",proxy={"http":"http://example.com"})
 ```
 ###### 引数全体としてはこんなカンジ
 ログイン済みのuuidを使うとSMSに届く認証番号を入力しなくてもログインできます！  
@@ -73,13 +73,12 @@ paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234",client_uuid="d
 2.x.x系はloginの返り値の["client_uuid"]に **"僕がわざとつけてます"**  
 実際のAPIから来た返り値にはついてないです！  
 ### アクセストークンについて
-2時間ほどで失効します  
+トークンを入力するとログインをスキップします  
+ちなみに2時間ほどで失効します (たぶん)  
 失効したら再ログインしてトークンを再発行する必要があります  
-実はこのログイン方法以外にトークンログインすることもできます  
-そっちの方は特に公開するつもりはないです(ただクッキーにトークンつけるだけ...)  
-トークンはクッキーにくっついてるのでセッション開始時に有効なトークンをくっつけてあげてください  
 これも無効ならS0001かS9999が返ってきます(てきとーなものを入れるとサーバーエラーになる)  
-トークンログインについては1回Twitterでぼそっとつぶやいたのでそれを参考にしといてください  
+~~トークンログインについては1回Twitterでぼそっとつぶやいたのでそれを参考にしといてください~~  
+PayPaython2.2.0でトークンログイン機能がつきました  
 #### [Twitter](https://twitter.com/TakeTakaAway/status/1744998645488070877)  
 ![1](images/0.png)  
 ###### これだけ
