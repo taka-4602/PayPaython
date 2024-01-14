@@ -98,7 +98,8 @@ print(paypay.token)
 - ふつうにuuid  
   ログインの返り値につけたものとおんなじ  
   他にも.phoneとか.passwordもあるけどこれはユーザー自身が入力してるので役目なし  
-  .refidとかもあるけどユーザー側は特に使わないので役目なし  
+  .refidとかもあるけどユーザー側は特に使わないので役目なし
+  
 ```paypaython 0.5.0```  
 - requestsがtls_clientに置き換わったもの  
   隠しオプション的な  
