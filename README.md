@@ -108,7 +108,7 @@ print(paypay.token)
 ↓Discordサーバー↓  
 https://discord.gg/X5SNVYtRPR  
 ↑にてPayPayで寄付してくれると超嬉しいです！！
-### 追記
+#### 追記
 どうやらAme-xさんによってJavaScript版がリリースされたようです  
 https://github.com/EdamAme-x/paypay.x.js  
 JavaScript勢はそっちを参考にするのもアリです
