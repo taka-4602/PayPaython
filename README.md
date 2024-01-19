@@ -100,7 +100,7 @@ print(paypay.token)
   他にも.phoneとか.passwordもあるけどこれはユーザー自身が入力してるので役目なし  
   .refidとかもあるけどユーザー側は特に使わないので役目なし
   
-```paypaython 0.5.0```  
+```paypaython 0.5.x```  
 - requestsがtls_clientに置き換わったもの  
   隠しオプション的な  
   
