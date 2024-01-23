@@ -1,5 +1,9 @@
 # PayPaython ![2](images/1.png)
-PythonからPayPay APIを操作するシンプルで使いやすいAPIラッパー  
+PythonからPayPay APIを操作するシンプルで使いやすいAPIラッパー   
+## [ ! ] PayPayからのレスポンス集 -> *[PayPayResponce.md](https://github.com/taka-4602/PayPaython/blob/main/PAYPAYRESPONCE.md)*
+PayPay APIを使った時に返されるレスポンスをまとめたドキュメントです  
+返ってきたレスポンスがどんな意味があるか知りたい場合、このドキュメントが役に立ちます  
+ドキュメントに載っていないレスポンス受け取った方、レスポンス.jsonを添付してtakaまで連絡くれると非常に助かります！！  
 ### >> ```pip install paypaython``` <<
 ## 始める前に確認すること
 ### ログインを3回失敗するとアカウントが一時ロックされる
