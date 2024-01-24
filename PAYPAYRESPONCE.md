@@ -152,6 +152,16 @@ Request ID: 0efMHen3RTNpO71PZ8KvpE2_YPOa7KGkDMcfTei1AwU50ujKHJhn_A==
 'nativeAction': None, 'buttonType': 'BLUE', 'googleAnalyticsInfo': None}, 
 {'title': '閉じる', 'action Type': 'CLOSE', 'deeplink': None, 'nativeAction': None, 'buttonType': 'WHITE', 'googleAnalyticsInfo': None}]}}}
 ```
+#### じぶん側に送金制限がかかっている 2
+```
+{'header':
+{'resultCode': 'S9999', 'resultMessage': 'Specific Error with half sheet'}, 'error':
+{'backendResultCode': 'PAYER_BLACKLIST', 'displayErrorResponse':
+{'backendResultCode': 'PAYER_BLACKLIST', 'iconUrl': 'https://image.paypay.ne.jp/error/app/caution.png', 'title': '現在ご利用を制限しています',
+'description': '安心安全な決済サービスを維持するため\nご利用を制限させていただく場合があります\n詳細はヘルプページをご確認ください', 'canCloseByOutsideTap': True, 'buttonList':
+[{'title': 'ヘルプページを確認する', 'actionType': 'DEEPLINK', 'deeplink': 'paypay://embed?url=https://paypay.ne.jp/rd/support/help/c0088/', 'nativeAction': None, 'buttonType': 'BLUE', 'googleAnalyticsInfo': None},
+{'title': '閉じる', 'actionType': 'CLOSE', 'deeplink': None, 'nativeAction': None, 'buttonType': 'WHITE', 'googleAnalyticsInfo': None}]}}}
+```
 #### 指定したexternal_idのユーザーが見つからない
 ```
 {'header':
