@@ -14,6 +14,12 @@ PayPayで返ってくるレスポンスの例をここにまとめます
 {'response_type': 'ErrorResponse', 'result_info': 
 {'result_status': 'F', 'result_code_id': '01102004', 'result_code': 'INTERNAL_AUTH_INVALID_GRANT_ERROR', 'result_msg': 'Bad credentials'}}
 ```
+#### 入力したワンタイムパスワードが間違ってる
+```
+{'response_type': 'ErrorResponse', 'result_info':
+{'result_status': 'F', 'result_code_id': '01102004', 'result_code': 'INTERNAL_AUTH_INVALID_GRANT_ERROR',
+'result_msg': 'Validate OTP call to notification service getting state code: 400'}}
+```
 #### アクセストークンの有効期限が切れてる 1
 ```
 {'header':
