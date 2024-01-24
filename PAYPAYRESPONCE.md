@@ -27,6 +27,7 @@ PayPayで返ってくるレスポンスの例をここにまとめます
 'error': {'oauth2V2TokenRolledbackTimestamp': None}}
 ```
 #### アクセストークンの有効期限が切れてる 2
+- user_infoを使った時はなぜかS0001ではなくS9999が返される
 ```
 {'header':
 {'resultCode': 'S9999', 'resultMessage': 'Cannot fetch data from UM'}}
@@ -149,3 +150,9 @@ It was received unexpected error from the remote server. [Error while accepting 
 {'resultCode': 'S5000', 'resultMessage': 'It was received unexpected error from the remote server. [failed to get user info from user module service]'},
 'error': {'backendResultCode': '00400045'}}
 ```
+### 余談
+アカウントロック、IPアドレスのブラックリストは運営に連絡すると解除してもらえます (悪質と判断されたらさすがにダメ)  
+希望薄でもいちおう運営に連絡してください、じぶんの利用規約違反でも解除してくれることがあります (確認済み)  
+#### 書いた人
+GitHub：[taka-4602](https://github.com/taka-4602)  
+Discord：[.taka.](https://discord.gg/aSyaAK7Ktm)
