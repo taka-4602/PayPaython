@@ -113,11 +113,19 @@ Request ID: 0efMHen3RTNpO71PZ8KvpE2_YPOa7KGkDMcfTei1AwU50ujKHJhn_A==
 'canCloseByOutsideTap': False, 'buttonList':
 [{'title': '閉じる', 'actionType': 'NATIVE', 'deeplink': None, 'nativeAction': 'RELOAD', 'buttonType': 'BLUE', 'googleAnalyticsInfo': None}]}}}
 ```
+#### 送金する値がおかしい
+- -1円など
+```
+{'header':
+{'resultCode': 'S5000', 'resultMessage':
+'It was received unexpected error from the remote server. [failed to get wallet consult info from wallet service]'},
+'error': {'backendResultCode': '00400044'}}
+```
 #### 自分から自分に送金した
 - 不明なエラーでもこれが出るかも
 ```
-{'header': {'resultCode': 'S5000', 'resultMessage': '
-It was received unexpected error from the remote server. [Error while accepting the p2p order]'},
+{'header': {'resultCode': 'S5000', 'resultMessage':
+'It was received unexpected error from the remote server. [Error while accepting the p2p order]'},
 'error': {'backendResultCode': '42007001'}}
 ```
 #### あいて側に残高の受け取り制限がかかっている
