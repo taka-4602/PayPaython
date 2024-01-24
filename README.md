@@ -87,7 +87,7 @@ paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234",client_uuid="d
 失効ならS0001かS9999が返ってきます (てきとーなものを入れるとサーバーエラーになる)  
 失効したら再ログインしてトークンを再発行する必要があります  
 ~~トークンログインについては1回Twitterでぼそっとつぶやいたのでそれを参考にしといてください~~  
-PayPaython2.2.0 / 1.1.1でトークンログイン機能がつきました  
+-> PayPaython2.2.0 / 1.1.1でトークンログイン機能がつきました  
 #### [Twitter](https://twitter.com/TakeTakaAway/status/1744998645488070877)  
 ![1](images/0.png)  
 ###### これだけ  
@@ -106,7 +106,8 @@ print(paypay.token)
 - ふつうにuuid  
   ログインの返り値につけたものとおんなじ  
   他にも.phoneとか.passwordもあるけどこれはユーザー自身が入力してるので役目なし  
-  .refidとかもあるけどユーザー側は特に使わないので役目なし
+  ~~.refidとかもあるけどユーザー側は特に使わないので役目なし~~  
+  -> v2.3.0で追加されたresend_otpの引数に使えるようになりました
   
 ```paypaython 0.5.x```  
 - requestsがtls_clientに置き換わったもの  
