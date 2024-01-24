@@ -2,7 +2,6 @@
 ハロー、takaです  
 PayPayで返ってくるレスポンスの例をここにまとめます  
 もしここに載っていないレスポンス受け取った方、レスポンス.jsonを添付してtakaまで連絡くれると非常に助かります！！  
-## 注意：このドキュメントはまだ書きかけです
 ## S0000
 ```
 {'header': {'resultCode': 'S0000', 'resultMessage': ''}
@@ -114,7 +113,7 @@ Request ID: 0efMHen3RTNpO71PZ8KvpE2_YPOa7KGkDMcfTei1AwU50ujKHJhn_A==
 It was received unexpected error from the remote server. [Error while accepting the p2p order]'},
 'error': {'backendResultCode': '42007001'}}
 ```
-#### 送金リンクの受け取り制限がかかっている
+#### あいて側に残高の受け取り制限がかかっている
 ```
 {'header': 
 {'resultCode': 'S9999', 'resultMessage': 'Specific Error with half sheet'}, 
@@ -126,16 +125,21 @@ It was received unexpected error from the remote server. [Error while accepting 
  'nativeAction': None, 'buttonType': 'BLUE', 'googleAnalyticsInfo': None}, 
  {'title': '閉じる', 'actionType': 'CLOSE', 'deeplink': None, 'nativeAction': None, 'buttonType': 'WHITE', 'googleAnalyticsInfo': None}]}}}
 ```
-#### 送金リンクを作成する時など、残高をやりとりするときに監視システムに目をつけられたらでる  
--> 本人確認をすることで解除される  
+#### じぶん側に送金制限がかかっている  
+- 本人確認をすることで解除される  
 ```
 {'header':
 ['resultCode': 'S9999', 'resultMessage': 'Specific Error with half sheet'), 'error':
 ['backendResultCode': 'KYC_INFO_REQUIRED_FOR_PREPAID', 'displayErrorResponse':
 ('backendResultCode': "iconUrl': 'KYC_INFO_REQUIRED_FOR_PREPAID', 'https://image.paypay.ne.jp/error/app/caution.png', 'title': 現在ご利用を制限しています',
-'description': '安心安全な決済サ
-ービスを維持するため\nご利用を制限させていただく場合があ ります\n詳細はヘルプページをご確認ください。 'canCloseByOutsideTap': True, 'buttonList':
-[{'title': 'ヘルプページ を確認する', 'action Type': 'DEEPLINK', 'deeplink': 'paypay://embed? url=https://paypay.ne.jp/rd/support/help/c0088/',
+'description': '安心安全な決済サービスを維持するため\nご利用を制限させていただく場合があります\n詳細はヘルプページをご確認ください。 'canCloseByOutsideTap': True, 'buttonList':
+[{'title': 'ヘルプページを確認する', 'action Type': 'DEEPLINK', 'deeplink': 'paypay://embed? url=https://paypay.ne.jp/rd/support/help/c0088/',
 'nativeAction': None, 'buttonType': 'BLUE', 'googleAnalyticsInfo': None}, 
-{'title': '閉 じる', 'action Type': 'CLOSE', 'deeplink': None, 'nativeAction': None, 'buttonType': 'WHITE', 'googleAnalyticsInfo': None}]}}}
+{'title': '閉じる', 'action Type': 'CLOSE', 'deeplink': None, 'nativeAction': None, 'buttonType': 'WHITE', 'googleAnalyticsInfo': None}]}}}
+```
+#### 指定したexternal_idのユーザーが見つからない
+```
+{'header':
+{'resultCode': 'S5000', 'resultMessage': 'It was received unexpected error from the remote server. [failed to get user info from user module service]'},
+'error': {'backendResultCode': '00400045'}}
 ```
