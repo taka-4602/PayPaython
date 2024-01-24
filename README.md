@@ -34,6 +34,10 @@ import PayPaython
 paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234")#ログイン済みclient_uuid="str"をセットするとOTPをパスできます #token="str"トークンをセットするとログインをパスします
 otp=input(f"SMSに届いた番号:{paypay.pre}-")
 print(paypay.login(otp))#uuid確認用に["client_uuid"]にわざとuuidくっつけてます
+#SMSの認証番号を再送
+print(paypay.resend_otp(paypay.refid))#refidの使い道ができた
+otp=input(f"SMSに届いた番号:{paypay.pre}-")#もっかい入力
+print(paypay.login(otp))
 #送金リンク確認
 print(paypay.check_link("osuvUuLmQH8WA4kW"))#ぺいぺい送金リンクの https://pay.paypay.ne.jp/osuvUuLmQH8WA4kW <-ここね
 #送金リンク受け取り
