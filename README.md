@@ -31,7 +31,7 @@ printも消してエラー判定のコードも消しています
 import PayPaython
 
 #ログイン
-paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234")#ログイン済みclient_uuid="str"をセットするとOTPをパスできます #token="str"トークンをセットするとログインをパスします
+paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234")#ログイン済みclient_uuid="str"をセットするとOTPをパスできます #token="str"トークンをセットするとログインをパスします #proxy=dictでプロキシを設定できます
 otp=input(f"SMSに届いた番号:{paypay.pre}-")
 print(paypay.login(otp))#uuid確認用に["client_uuid"]にわざとuuidくっつけてます
 #SMSの認証番号を再送
@@ -40,6 +40,8 @@ otp=input(f"SMSに届いた番号:{paypay.pre}-")#もっかい入力
 print(paypay.login(otp))
 #送金リンク確認
 print(paypay.check_link("osuvUuLmQH8WA4kW"))#ぺいぺい送金リンクの https://pay.paypay.ne.jp/osuvUuLmQH8WA4kW <-ここね
+#or
+print(PayPaython.Pay2().check_link("osuvUuLmQH8WA4kW"))#ログインなしでcheck_linkを使えるPay2クラスです #これもproxy=dictでプロキシを設定できる
 #送金リンク受け取り
 print(paypay.receive("osuvUuLmQH8WA4kW"))#パスワードはpassword=int #事前にcheck_linkして返ってきたdictを引数infoに入れるとそのdictを使うようになります
 #送金リンクを辞退
