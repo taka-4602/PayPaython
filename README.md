@@ -112,7 +112,12 @@ print(paypay.token)
 ```paypaython 0.5.x```  
 - requestsがtls_clientに置き換わったもの  
   隠しオプション的な  
-  
+
+```PayPaython.Pay2```
+- check_linkはログインしていなくても使えるので、ログインなしでcheck_linkだけ使えるPay2クラスです  
+  ```PayPatrhon.Pay2().check_link("osuvUuLmQH8WA4kW")```  
+  Pay2()には引数にプロキシをぶちこめます  
+  ```Pay2(proxy=dict)```
 ## コンタクト
 ↓Discordサーバー↓  
 https://discord.gg/X5SNVYtRPR  
