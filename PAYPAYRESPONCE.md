@@ -94,6 +94,17 @@ Request ID: 0efMHen3RTNpO71PZ8KvpE2_YPOa7KGkDMcfTei1AwU50ujKHJhn_A==
 {'feePercentage': 0, 'label': '手数料（2.5%）', 'zeroFeeText': '初回無料'}, 'necessaryChargeAmount': 189036, 'minimumChargeAmount': False}], 'appealDescription':
 {'text': '請 求書払いでの納税はチャージせずにクレジット（旧あと払い）で', 'linkUrl': 'paypay://internalembed?url=https%3A%2F%2Fwww.paypay.ne.jp%2Fportal%2Fbill-payment%2Ftax-bills', 'headerIcon': None, 'isBold': True, 'color': '#3895FF', 'backgroundColor': '#E5F8FF'}}}
 ```
+#### 送金限度額を超えた
+```
+{"header":
+{"resultCode": "S9999","resultMessage": "Specific Error with half sheet"},"error":
+{"backendResultCode": "P2P_30_SENDER_LIMIT","displayErrorResponse":
+{"backendResultCode": "P2P_30_SENDER_LIMIT","iconUrl": "https://image.paypay.ne.jp/error/app/caution.png",
+"title": "現在ご利用を制限しています","description": "利用限度額を超えています","canCloseByOutsideTap": true,"buttonList":
+[{"title": "ヘルプページを確認する","actionType": "DEEPLINK","deeplink": "paypay://embed?url=https://paypay.ne.jp/rd/support/help/c0088/","nativeAction": null,"buttonType": "BLUE","googleAnalyticsInfo": null},
+{"title": "閉じる","actionType": "CLOSE","deeplink": null,"nativeAction": null,"buttonType": "WHITE","googleAnalyticsInfo": null}]}}}
+  
+```
 #### 受け取りパスワードが間違ってる
 ```
 {'header':
