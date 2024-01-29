@@ -13,11 +13,11 @@ print(paypay.check_link("osuvUuLmQH8WA4kW"))#ぺいぺい送金リンクの http
 #or
 print(PayPaython.Pay2().check_link("osuvUuLmQH8WA4kW"))#ログインなしでcheck_linkを使えるPay2クラスです #これもproxy=dictでプロキシを設定できる
 #送金リンク受け取り
-print(paypay.receive("osuvUuLmQH8WA4kW"))#パスワードはpassword=int #事前にcheck_linkして返ってきたdictを引数infoに入れるとそのdictを使うようになります
+print(paypay.receive("osuvUuLmQH8WA4kW"))#パスワードはpassword=str #事前にcheck_linkして返ってきたdictを引数infoに入れるとそのdictを使うようになります
 #送金リンクを辞退
 print(paypay.reject("osuvUuLmQH8WA4kW"))#これもinfoにdictつっこめる
 #送金リンクを作成
-print(paypay.create_link(kingaku=1,password=1111))#パスワードはpassword=int
+print(paypay.create_link(kingaku=1,password="1111"))#パスワードはpassword=str
 #残高確認
 print(paypay.balance())
 #ユーザー情報
