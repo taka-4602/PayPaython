@@ -32,5 +32,5 @@ print(paypay.history())
 print(paypay.send_money(kingaku=1,external_id="048f4fef00bdbad00"))#このidはてきとーです
 #送金してもらうためのURLを作成する(PayPayアプリのQRコードとおなじ)
 print(paypay.create_p2pcode())
-#支払いのワンタイムコードを作成する
+#支払いのワンタイムコードを作成する(ホーム画面にあるあのバーコードとおなじ)
 print(paypay.create_payment_otcfh())
