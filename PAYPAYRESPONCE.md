@@ -79,7 +79,7 @@ Request ID: 0efMHen3RTNpO71PZ8KvpE2_YPOa7KGkDMcfTei1AwU50ujKHJhn_A==
 {'header':
 {'resultCode': 'S2205', 'resultMessage': 'Failed to P2P: No payment methods.'}, 'error': {}}
 ```
-#### 残高不足 2
+- クレジットとか登録してたら長くなる
 ```
 {'header':
 {'resultCode': 'S1005', 'resultMessage': 'balance is insufficient'},'error':
