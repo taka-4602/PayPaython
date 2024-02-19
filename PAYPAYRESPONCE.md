@@ -151,6 +151,15 @@ Request ID: 0efMHen3RTNpO71PZ8KvpE2_YPOa7KGkDMcfTei1AwU50ujKHJhn_A==
  'nativeAction': None, 'buttonType': 'BLUE', 'googleAnalyticsInfo': None}, 
  {'title': '閉じる', 'actionType': 'CLOSE', 'deeplink': None, 'nativeAction': None, 'buttonType': 'WHITE', 'googleAnalyticsInfo': None}]}}}
 ```
+```
+{'header':
+{'resultCode': 'S9999', 'resultMessage': 'Specific Error with half sheet'},
+'error':
+{'backendResultCode': 'P2P_RECEIVER_ABNORMALLY_BLOCKING', 'displayErrorResponse':
+{'backendResultCode': 'P2P_RECEIVER_ABNORMALLY_BLOCKING', 'iconUrl': 'https://image.paypay.ne.jp/error/app/caution.png',
+'title': '詐欺にご注意ください', 'description': '"送る・受け取る" を使った詐欺が多発しています\n面識のない相手や疑わしい取引には特にご注意ください', 'canCloseByOutsideTap': False, 'buttonList':
+[{'title': '閉じる', 'actionType': 'CLOSE', 'deeplink': None, 'nativeAction': None, 'buttonType': 'BLUE', 'googleAnalyticsInfo': None}]}}}
+```
 #### じぶん側に送金制限がかかっている  
 - 本人確認をすることで解除される  
 ```
