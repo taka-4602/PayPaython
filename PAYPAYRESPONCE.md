@@ -172,7 +172,7 @@ Request ID: 0efMHen3RTNpO71PZ8KvpE2_YPOa7KGkDMcfTei1AwU50ujKHJhn_A==
 'nativeAction': None, 'buttonType': 'BLUE', 'googleAnalyticsInfo': None}, 
 {'title': '閉じる', 'action Type': 'CLOSE', 'deeplink': None, 'nativeAction': None, 'buttonType': 'WHITE', 'googleAnalyticsInfo': None}]}}}
 ```
-#### じぶん側に送金制限がかかっている 2
+- これは本人確認だけじゃダメかも
 ```
 {'header':
 {'resultCode': 'S9999', 'resultMessage': 'Specific Error with half sheet'}, 'error':
