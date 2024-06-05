@@ -1,6 +1,11 @@
 # PayPaython ![2](images/1.png)
 PythonからPayPay APIを操作するシンプルで使いやすいAPIラッパー   
 ### >> ```pip install paypaython``` <<
+## WebAPIは推奨されなくなりました
+WebAPIは簡単に使えて便利でしたが、仕様変更が重なって推奨されなくなりました  
+モバイルAPI用は↓からどうぞ  
+https://github.com/taka-4602/PayPaython-mobile  
+WebAPIもまだふつうに使えるのでWebAPIでOKな人はそのままどうぞ～
 ## [ ! ] PayPayからのレスポンス集 -> *[PayPayResponce.md](https://github.com/taka-4602/PayPaython/blob/main/PAYPAYRESPONCE.md)*
 PayPay APIを使った時に返されるレスポンスをまとめたドキュメントです  
 返ってきたレスポンスにどんな意味があるか知りたい場合、このドキュメントが役に立ちます  
