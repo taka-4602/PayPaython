@@ -71,7 +71,6 @@ print(paypay.create_p2pcode())
 print(paypay.create_payment_otcfh())
 ```
 いちおう#コメントで大まかな使い方は記載してます  
-大まか...ですがほんとうにこれだけです、とってもシンプル  
 send_moneyで使うexternal_idはuser_infoにくっついてきます
 ### すでにログイン済みのclient_uuid or トークンでログイン
 ```python
@@ -82,7 +81,7 @@ paypay=PayPaython.PayPay("08012345678","Test-1234")
 paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234",client_uuid="d2d786a9-6a9f-49e1-9139-ba2f5f7f9f1d",token="とてもながい==",proxy={"http":"http://example.com"})
 ```
 ###### 引数全体としてはこんなカンジ
-ログイン済みのuuidを使うとSMSに届く認証番号を入力しなくてもログインできます！  
+ログイン済みのuuidを使うとSMSに届く認証番号を入力しなくてもログインできます  
 そんなのないよって方はとりあえず電話番号とパスワードだけでログインしてください、ログインに成功するとuuidが確認できます
 ### uuidの確認
 1.x.x系はログイン成功時にターミナルに表示されます  
@@ -98,12 +97,10 @@ paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234",client_uuid="d
 #### [Twitter](https://twitter.com/TakeTakaAway/status/1744998645488070877)  
 ![1](images/0.png)  
 ###### これだけ  
-え、トークンがわからないって...？  
-そんなあなたに
+トークンは返り値のdictにも含まれていますが、変数にもあります
 ```python
 print(paypay.token)
 ```
-よくできてるでしょ
 ### もう少し知る
 ```paypay.pre```
 - ワンタイムパスワードの接頭語  
@@ -125,12 +122,10 @@ print(paypay.token)
   ```PayPatrhon.Pay2().check_link("osuvUuLmQH8WA4kW")```  
   Pay2()には引数にプロキシをぶちこめます  
   ```Pay2(proxy=dict)```
-## コンタクト
-↓Discordサーバー↓  
-https://discord.gg/X5SNVYtRPR  
-↑にてPayPayで寄付してくれると超嬉しいです！！
+## コンタクト  
+Discord サーバー / https://discord.gg/aSyaAK7Ktm  
+Discord ユーザー名 / .taka.  
 #### 追記
 どうやらAme-xさんによってJavaScript版がリリースされたようです  
 https://github.com/EdamAme-x/paypay.x.js  
 JavaScript勢はそっちを参考にするのもアリです
-## このAPIラッパーをPayPay詐欺とかいうクソしょーもないことに使わないでください。
