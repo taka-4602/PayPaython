@@ -8,8 +8,7 @@ https://github.com/taka-4602/PayPaython-mobile
 WebAPIもまだふつうに使えるのでWebAPIでOKな人はそのままどうぞ～
 ## [ ! ] PayPayからのレスポンス集 -> *[PayPayResponce.md](https://github.com/taka-4602/PayPaython/blob/main/PAYPAYRESPONCE.md)*
 PayPay APIを使った時に返されるレスポンスをまとめたドキュメントです  
-返ってきたレスポンスにどんな意味があるか知りたい場合、このドキュメントが役に立ちます  
-もしドキュメントに載っていないレスポンス受け取った方、レスポンス.jsonを添付してtakaまで連絡くれると非常に助かります！！  
+返ってきたレスポンスにどんな意味があるか知りたい場合、このドキュメントが役に立つかもしれません  
 ## 始める前に確認すること
 ### ログインを3回失敗するとアカウントが一時ロックされる
 PayPayのサポートに連絡することで早く解除してもらえるみたいです (めんどくさいけど)
@@ -21,16 +20,7 @@ PayPayのサポートに連絡することで早く解除してもらえるみ�
 ## すでにPayPayを操作できるDiscordのBotをデプロイしてます！
 ↓Bot招待リンク↓  
 https://discord.com/api/oauth2/authorize?client_id=1189119988678803496&permissions=8&scope=bot
-## 注意：PayPaython 1.x.x系と2.x.x系は別物です
-APIラッパー側の機能を減らしてユーザー側の自由度を上げたものが2.x.x系です  
-printも消してエラー判定のコードも消しています  
-もし自由度よりもターミナルでちまちまやりたい方は1.x.x系をおすすめします  
-- ```pip install paypaython==1.1.2```
 ## Let's Go!
-- ```pip install requests``` (PayPayのAPIにリクエストするんだから必須)
-- ```pip install paypaython``` (これ)
-
-この2つをインストールしたらリポジトリにあるlets_go.pyからすぐに使い始めることができます！
 ### lets_go_2.x.x.py
 ```python
 import PayPaython
@@ -84,20 +74,20 @@ paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234",client_uuid="d
 ログイン済みのuuidを使うとSMSに届く認証番号を入力しなくてもログインできます  
 そんなのないよって方はとりあえず電話番号とパスワードだけでログインしてください、ログインに成功するとuuidが確認できます
 ### uuidの確認
-1.x.x系はログイン成功時にターミナルに表示されます  
-2.x.x系はloginの返り値の["client_uuid"]に僕がわざとつけてます  
-実際のAPIから来た返り値にはついてないです！  
+ ```python
+print(paypay.uuid)
+```
 ### アクセストークンについて
 トークンを入力するとログインをスキップします  
-ちなみに2時間ほどで失効します (たぶん)  
+WebAPIでは2時間で失効します  
 失効ならS0001かS9999が返ってきます (てきとーなものを入れるとサーバーエラーになる)  
 失効したら再ログインしてトークンを再発行する必要があります  
 ~~トークンログインについては1回Twitterでぼそっとつぶやいたのでそれを参考にしといてください~~  
--> PayPaython2.2.0 / 1.1.1でトークンログイン機能がつきました  
+-> PayPaython 2.2.0からトークンログイン機能がつきました  
 #### [Twitter](https://twitter.com/TakeTakaAway/status/1744998645488070877)  
 ![1](images/0.png)  
 ###### これだけ  
-トークンは返り値のdictにも含まれていますが、変数にもあります
+トークンは返り値のdictにも含まれていますが、変数にもあります  
 ```python
 print(paypay.token)
 ```
@@ -106,16 +96,6 @@ print(paypay.token)
 - ワンタイムパスワードの接頭語  
   TA-4602の"TA"の部分
   
-```paypay.uuuid```
-- ふつうにuuid  
-  ログインの返り値につけたものとおんなじ  
-  他にも.phoneとか.passwordもあるけどこれはユーザー自身が入力してるので役目なし  
-  ~~.refidとかもあるけどユーザー側は特に使わないので役目なし~~  
-  -> v2.3.0で追加されたresend_otpの引数に使えるようになりました
-  
-```paypaython 0.5.x```  
-- requestsがtls_clientに置き換わったもの  
-  隠しオプション的な  
 
 ```PayPaython.Pay2```
 - check_linkはログインしていなくても使えるので、ログインなしでcheck_linkだけ使えるPay2クラスです  
