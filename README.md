@@ -79,9 +79,8 @@ paypay=PayPaython.PayPay("08012345678","Test-1234")
 ```py
 paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234",client_uuid="d2d786a9-6a9f-49e1-9139-ba2f5f7f9f1d",token="とてもながい==",proxy={"http":"http://example.com"})
 ```
-###### 引数全体としてはこんなカンジ
 ログイン済みのUUIDを使うとSMSに届く認証番号を入力しなくてもログインできます  
-そんなのないよって方はとりあえず電話番号とパスワードだけでログインしてください、ログインに成功するとuuidが確認できます
+そんなのないよって方はとりあえず電話番号とパスワードだけでログインしてください、ログインに成功するとUUIDが確認できます
 ```py
 print(paypay.client_uuid)
 ```
