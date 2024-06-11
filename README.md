@@ -2,10 +2,10 @@
 PythonからPayPay APIを操作するシンプルで使いやすいAPIラッパー   
 ### >> ```pip install paypaython``` <<
 ## WebAPIは推奨されなくなりました
-WebAPIは簡単に使えて便利でしたが、仕様変更が重なって推奨されなくなりました  
+WebAPIは簡単に使えて便利でしたが、仕様変更が重なって推奨されなくなりました (リンク作成と送金ができなくなった)  
 モバイルAPI用は↓からどうぞ  
 https://github.com/taka-4602/PayPaython-mobile  
-WebAPIもまだふつうに使えるのでWebAPIでOKな人はそのままどうぞ～
+WebAPIもまだふつうに使えるので上記の機能が必要ない方はWebAPIでOKです、そのままどうぞ～
 ## [ ! ] PayPayからのレスポンス集 -> *[PayPayResponce.md](https://github.com/taka-4602/PayPaython/blob/main/PAYPAYRESPONCE.md)*
 PayPay APIを使った時に返されるレスポンスをまとめたドキュメントです  
 返ってきたレスポンスにどんな意味があるか知りたい場合、このドキュメントが役に立つかもしれません  
@@ -17,91 +17,88 @@ PayPayのサポートに連絡することで早く解除してもらえるみ�
 ### 日本からしかアクセスできない
 ふつうにブロックされます  
 海外のバーチャルマシンとかを使う場合はプロキシを使いましょう
-## すでにPayPayを操作できるDiscordのBotをデプロイしてます！
-↓Bot招待リンク↓  
-https://discord.com/api/oauth2/authorize?client_id=1189119988678803496&permissions=8&scope=bot
 ## Let's Go!
-### lets_go_2.x.x.py
-```python
-import PayPaython
+#### example.py
+```py
+from PayPaython import PayPay
 
-#ログイン
-paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234")#ログイン済みclient_uuid="str"をセットするとOTPをパスできます #token="str"トークンをセットするとログインをパスします #proxy=dictでプロキシを設定できます
-otp=input(f"SMSに届いた番号:{paypay.pre}-")
-print(paypay.login(otp))#uuid確認用に["client_uuid"]にわざとuuidくっつけてます
-#SMSの認証番号を再送
-print(paypay.resend_otp(paypay.refid))#refidの使い道ができた
-otp=input(f"SMSに届いた番号:{paypay.pre}-")#もっかい入力
-print(paypay.login(otp))
-#送金リンク確認
-print(paypay.check_link("osuvUuLmQH8WA4kW"))#ぺいぺい送金リンクの https://pay.paypay.ne.jp/osuvUuLmQH8WA4kW <-ここね
+paypay=PayPay(phone="08012345678",password="Test-1234")#ログイン済みclient_uuid="str"をセットするとOTPをスキップできます #access_token="str"トークンをセットするとログインをスキップします #proxy=dictでプロキシを設定できます
+otp=input(f"SMSに届いた番号:{paypay.otp_prefix}-")#otp_prefixはSMSにくるワンタイムパスワードの接頭、TA-4602のTAの部分
+paypay.resend_otp(paypay.otp_reference_id)#ワンタイムパスワードを再送
+otp=input(f"SMSに届いた番号:{paypay.otp_prefix}-")#再送したらもっかい入力
+paypay.login(otp)#ワンタイムパスワードを使ってログイン
+print(paypay.access_token)#アクセストークン、リフレッシュはなぜか404が出る
+print(paypay.client_uuid)#クライアントUUID、トークンの有効期限が切れた後にこれを設定して再度ログインするとOTPをスキップできる
+
+link_info=paypay.link_check("https://pay.paypay.ne.jp/osuvUuLmQH8WA4kW")#送金リンク確認、URLかID = "osuvUuLmQH8WA4kW" この部分 でリクエストできる
 #or
-print(PayPaython.Pay2().check_link("osuvUuLmQH8WA4kW"))#ログインなしでcheck_linkを使えるPay2クラスです #これもproxy=dictでプロキシを設定できる
-#送金リンク受け取り
-print(paypay.receive("osuvUuLmQH8WA4kW"))#パスワードはpassword=str #事前にcheck_linkして返ってきたdictを引数infoに入れるとそのdictを使うようになります
-#送金リンクを辞退
-print(paypay.reject("osuvUuLmQH8WA4kW"))#これもinfoにdictつっこめる
-#送金リンクを作成
-print(paypay.create_link(kingaku=1,password="1111"))#パスワードはpassword=str
-#残高確認
-print(paypay.balance())
-#ユーザー情報
-print(paypay.user_info())
-#ユーザーの表示情報
-print(paypay.display_info())
-#ユーザーの支払い方法
-print(paypay.payment_method())
-#取引履歴
-print(paypay.history())
-#指定したexternalidのユーザーに直接送金
-print(paypay.send_money(kingaku=1,external_id="048f4fef00bdbad00"))#このidはてきとーです
-#送金してもらうためのURLを作成する(PayPayアプリのQRコードとおなじ)
-print(paypay.create_p2pcode())
-#支払いのワンタイムコードを作成する(ホーム画面にあるあのバーコードとおなじ)
-print(paypay.create_payment_otcfh())
+PayPay().link_check("https://pay.paypay.ne.jp/osuvUuLmQH8WA4kW")#link_checkはログインなしでも使うことができる
+print(paypay.link_amount)#リンクの合計金額
+print(paypay.link_money_light)#金額のマネーライト分
+print(paypay.link_money)#金額のマネー分
+print(paypay.link_has_password)#パスワードがあるなら True
+print(paypay.link_chat_room_id)#チャットルームID リンク受け取ったらメッセージ送れるあれのID
+print(paypay.link_status)#PENDING COMPLEATED REJECTED FAILED
+print(paypay.link_order_id)
+#paypay.link_nantoka で返されるのはリンクチェックしたものだけ
+
+paypay.link_receive("ここもURL / IDどっちでもOK")#送金リンク受け取り、パスワードはpassword=str
+paypay.link_receive("ここもURL / IDどっちでもOK",link_info=link_info)#link_info=dict、これを設定するとリンクチェックをスキップする
+paypay.link_reject("ここもURL / IDどっちでもOK")#送金リンクを辞退、これもlink_infoにdictをつっこめる
+
+paypay.get_balance()#残高確認
+print(paypay.all_balance)#すべての残高
+print(paypay.useable_balance)#すべての使用可能な残高
+print(paypay.money_light)#もってるマネーライト
+print(paypay.money)#もってるマネー
+print(paypay.point)#もってるポイント
+
+paypay.get_profile()#ユーザー情報を確認
+print(paypay.name)#ユーザー名
+print(paypay.external_user_id)#識別のためのユーザーID、自分で決められるやつとは違う
+print(paypay.icon)#アイコンのURL
+
+print(paypay.get_history())#取引履歴を確認
+
+paypay.create_p2pcode()#送金してもらうためのURLを作成する(PayPayアプリのQRコードとおなじ)
+print(paypay.created_p2pcode)#↑で作ったURL
+
+paypay.create_paymentcode()#レジでスキャンする用のバーコードを生成、画像はアプリ内で処理されるからコードだけ生成してもよっぽど機材を持ってる人じゃない限り無意味、死に機能
+
+paypay.create_link(amount=1,password="1111")#送金リンクを作成、パスワードはpassword=str...この機能は2024/3月下旬に使えなくなった (エンドポイントから削除された)
+paypay.send_money(amount=1,external_id="048f4fef00bdbad00")#指定したexternalidのユーザーに直接送金...この機能は2024/3月下旬に使えなくなった (エンドポイントから削除された)
 ```
-いちおう#コメントで大まかな使い方は記載してます  
-send_moneyで使うexternal_idはuser_infoにくっついてきます
-### すでにログイン済みのclient_uuid or トークンでログイン
-```python
+#コメントで書いてあることが全部  
+よく使う返り値は変数に入れているので、レスポンス全体を確認する必要はなくなった  
+うまくいかなかった場合はエラーをraiseするようになったのでユーザー側がdictを気にするのはget_historyくらい  
+### すでにログイン済みのClient_UUID or トークンでログイン
+```py
 paypay=PayPaython.PayPay("08012345678","Test-1234")
 ```
-上のログイン部分にはあとclient_uuidとトークンとプロキシを引数に使えます  
-```python
+上のログイン部分にはあとClient_UUIDとトークンとプロキシを引数に使えます  
+```py
 paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234",client_uuid="d2d786a9-6a9f-49e1-9139-ba2f5f7f9f1d",token="とてもながい==",proxy={"http":"http://example.com"})
 ```
 ###### 引数全体としてはこんなカンジ
-ログイン済みのuuidを使うとSMSに届く認証番号を入力しなくてもログインできます  
+ログイン済みのUUIDを使うとSMSに届く認証番号を入力しなくてもログインできます  
 そんなのないよって方はとりあえず電話番号とパスワードだけでログインしてください、ログインに成功するとuuidが確認できます
-### uuidの確認
- ```python
-print(paypay.uuid)
+```py
+print(paypay.client_uuid)
 ```
 ### アクセストークンについて
 トークンを入力するとログインをスキップします  
-WebAPIでは2時間で失効します  
+WebAPIは2時間で失効します  
 失効ならS0001かS9999が返ってきます (てきとーなものを入れるとサーバーエラーになる)  
 失効したら再ログインしてトークンを再発行する必要があります  
-~~トークンログインについては1回Twitterでぼそっとつぶやいたのでそれを参考にしといてください~~  
--> PayPaython 2.2.0からトークンログイン機能がつきました  
-#### [Twitter](https://twitter.com/TakeTakaAway/status/1744998645488070877)  
-![1](images/0.png)  
-###### これだけ  
 トークンは返り値のdictにも含まれていますが、変数にもあります  
-```python
-print(paypay.token)
+```py
+print(paypay.access_token)
 ```
-### もう少し知る
-```paypay.pre```
-- ワンタイムパスワードの接頭語  
-  TA-4602の"TA"の部分
-  
-
-```PayPaython.Pay2```
-- check_linkはログインしていなくても使えるので、ログインなしでcheck_linkだけ使えるPay2クラスです  
-  ```PayPatrhon.Pay2().check_link("osuvUuLmQH8WA4kW")```  
-  Pay2()には引数にプロキシをぶちこめます  
-  ```Pay2(proxy=dict)```
+## 余談
+2024/6/12に久しぶりにWebAPIのPayPaythonを更新しました (それに伴ってこのReadmeも一新)  
+pypiにはたくさんバージョンがあると思いますが、僕は最新バージョンしかサポートしないのでそこはご了承ください  
+噂でWebAPIは凍結しやすいって聞いたことが何回かあるけど、僕は未確認だからそれについてはあんまり言及しません (トークンを使わずセッションを作りすぎるとなるのかもしれない)  
+それにしても、このAPIラッパーを作り始めた頃のコードは今から見るとひどく見えます...
 ## コンタクト  
 Discord サーバー / https://discord.gg/aSyaAK7Ktm  
 Discord ユーザー名 / .taka.  
