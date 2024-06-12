@@ -24,6 +24,7 @@ class PayPay:
         self.phone=phone
         self.password=password
         if access_token:
+            self.access_token=access_token
             self.session.cookies.set("token",access_token)
         else:
             self.access_token=None
