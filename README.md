@@ -1,6 +1,10 @@
 # PayPaython ![2](images/1.png)
 PythonからPayPay APIを操作するシンプルで使いやすいAPIラッパー   
-### >> ```pip install paypaython``` <<
+## インストール
+```py
+pip install paypaython
+```
+必須：requests
 ## WebAPIは推奨されなくなりました
 WebAPIは簡単に使えて便利でしたが、仕様変更が重なって推奨されなくなりました (リンク作成と送金ができなくなった)  
 モバイルAPI用は↓からどうぞ  
