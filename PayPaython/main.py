@@ -1,6 +1,7 @@
 import requests
 import datetime
 from uuid import uuid4
+from typing import NamedTuple
 
 headers={
     "Accept":"application/json, text/plain, */*",
@@ -14,8 +15,6 @@ class PayPayNetWorkError(Exception):
     pass
 class PayPayLoginError(Exception):
     pass
-class NetWorkError(Exception):
-    pass
 class PayPay:
     def __init__(self,phone:str=None,password:str=None,client_uuid:str=str(uuid4()).upper(),access_token:str=None,proxy:dict=None):
         self.session = requests.Session()
@@ -26,7 +25,7 @@ class PayPay:
         if access_token:
             self.access_token=access_token
             self.session.cookies.set("token",access_token)
-        else:
+        elif phone:
             self.access_token=None
             payload = {
                 "scope":"SIGN_IN",
@@ -37,10 +36,8 @@ class PayPay:
                 "add_otp_prefix": True,
                 "language":"ja"
             }
-            try:
-                login=self.session.post("https://www.paypay.ne.jp/app/v1/oauth/token",json=payload,headers=headers,proxies=proxy)
-            except Exception as e:
-                raise NetWorkError(e)
+            
+            login=self.session.post("https://www.paypay.ne.jp/app/v1/oauth/token",json=payload,headers=headers,proxies=proxy)
             try:
                 self.access_token=(login.json()["access_token"])
             except:
@@ -67,13 +64,13 @@ class PayPay:
         
         login=self.session.post("https://www.paypay.ne.jp/app/v1/oauth/token",json=payload,headers=headers,proxies=self.proxy).json()
         try:
-            self.access_token=(login["access_token"])
+            self.access_token=login["access_token"]
         except:
             raise PayPayLoginError(login)
         
         return login
 
-    def resend_otp(self,otp_reference_id:str):
+    def resend_otp(self,otp_reference_id:str) -> dict:
         payload={
             "add_otp_prefix":"true"
         }
@@ -87,7 +84,7 @@ class PayPay:
         
         return resend
     
-    def get_balance(self) -> dict:
+    def get_balance(self):
         if not self.access_token:
             raise PayPayLoginError("まずはログインしてください")
         
@@ -98,15 +95,27 @@ class PayPay:
         if balance["header"]["resultCode"] != "S0000":
             raise PayPayError(balance)
 
-        self.money=balance["payload"]["walletDetail"]["emoneyBalanceInfo"]["balance"]
-        self.money_light=balance["payload"]["walletDetail"]["prepaidBalanceInfo"]["balance"]
-        self.all_balance=balance["payload"]["walletSummary"]["allTotalBalanceInfo"]["balance"]
-        self.useable_balance=balance["payload"]["walletSummary"]["usableBalanceInfoWithoutCashback"]["balance"]
-        self.point=balance["payload"]["walletDetail"]["cashBackBalanceInfo"]["balance"]
+        try:
+            money=balance["payload"]["walletDetail"]["emoneyBalanceInfo"]["balance"]
+        except:
+            money=None
+        
+        class GetBalance(NamedTuple):
+            money: int
+            money_light: int
+            all_balance: int
+            useable_balance: int
+            points: int
+            raw: dict
 
-        return balance
+        money_light=balance["payload"]["walletDetail"]["prepaidBalanceInfo"]["balance"]
+        all_balance=balance["payload"]["walletSummary"]["allTotalBalanceInfo"]["balance"]
+        useable_balance=balance["payload"]["walletSummary"]["usableBalanceInfoWithoutCashback"]["balance"]
+        points=balance["payload"]["walletDetail"]["cashBackBalanceInfo"]["balance"]
+
+        return GetBalance(money,money_light,all_balance,useable_balance,points,balance)
     
-    def get_profile(self) -> dict:
+    def get_profile(self):
         if not self.access_token:
             raise PayPayLoginError("まずはログインしてください")
         
@@ -117,12 +126,18 @@ class PayPay:
 
         if profile["header"]["resultCode"] != "S0000":
             raise PayPayError(profile)
-        
-        self.name=profile["payload"]["userProfile"]["nickName"]
-        self.external_user_id=profile["payload"]["userProfile"]["externalUserId"]
-        self.icon=profile["payload"]["userProfile"]["avatarImageUrl"]
 
-        return profile
+        class GetProfile(NamedTuple):
+            name: str
+            external_user_id: str
+            icon: str
+            raw: dict
+        
+        name=profile["payload"]["userProfile"]["nickName"]
+        external_user_id=profile["payload"]["userProfile"]["externalUserId"]
+        icon=profile["payload"]["userProfile"]["avatarImageUrl"]
+
+        return GetProfile(name,external_user_id,icon,profile)
     
     def get_history(self) -> dict:
         if not self.access_token:
@@ -137,7 +152,7 @@ class PayPay:
         
         return history
         
-    def link_check(self,url:str) -> dict:
+    def link_check(self,url:str):
         if "https://" in url:
             url=url.replace("https://pay.paypay.ne.jp/","")
 
@@ -149,18 +164,31 @@ class PayPay:
         if link_info["header"]["resultCode"] != "S0000":
             raise PayPayError(link_info)
         
-        self.link_sender_name=link_info["payload"]["sender"]["displayName"]
-        self.link_sender_external_id=link_info["payload"]["sender"]["externalId"]
-        self.link_sender_icon=link_info["payload"]["sender"]["photoUrl"]
-        self.link_order_id=link_info["payload"]["pendingP2PInfo"]["orderId"]
-        self.link_chat_room_id=link_info["payload"]["message"]["chatRoomId"]
-        self.link_amount=link_info["payload"]["pendingP2PInfo"]["amount"]
-        self.link_status=link_info["payload"]["message"]["data"]["status"]
-        self.link_money_light=link_info["payload"]["message"]["data"]["subWalletSplit"]["senderPrepaidAmount"]
-        self.link_money=link_info["payload"]["message"]["data"]["subWalletSplit"]["senderEmoneyAmount"]
-        self.link_has_password=link_info["payload"]["pendingP2PInfo"]["isSetPasscode"]
+        class LinkInfo(NamedTuple):
+            sender_name: str
+            sender_external_id: str
+            sender_icon: str
+            order_id: str
+            chat_room_id: str
+            amount: int
+            status: str
+            money_light: int
+            money: int
+            has_password: bool
+            raw: dict
 
-        return link_info
+        sender_name=link_info["payload"]["sender"]["displayName"]
+        sender_external_id=link_info["payload"]["sender"]["externalId"]
+        sender_icon=link_info["payload"]["sender"]["photoUrl"]
+        order_id=link_info["payload"]["pendingP2PInfo"]["orderId"]
+        chat_room_id=link_info["payload"]["message"]["chatRoomId"]
+        amount=link_info["payload"]["pendingP2PInfo"]["amount"]
+        status=link_info["payload"]["message"]["data"]["status"]
+        money_light=link_info["payload"]["message"]["data"]["subWalletSplit"]["senderPrepaidAmount"]
+        money=link_info["payload"]["message"]["data"]["subWalletSplit"]["senderEmoneyAmount"]
+        has_password=link_info["payload"]["pendingP2PInfo"]["isSetPasscode"]
+
+        return LinkInfo(sender_name,sender_external_id,sender_icon,order_id,chat_room_id,amount,status,money_light,money,has_password,link_info)
     
     def link_receive(self,url:str,password:str=None,link_info:dict=None) -> dict:
         if not self.access_token:
@@ -243,20 +271,24 @@ class PayPay:
         
         return reject
     
-    def create_p2pcode(self) -> dict:
+    def create_p2pcode(self):
         if not self.access_token:
             raise PayPayLoginError("まずはログインしてください")
         
-        p2pcode = self.session.post("https://www.paypay.ne.jp/app/v1/p2p-api/createP2PCode",headers=headers,proxies=self.proxy).json()
-        if p2pcode["header"]["resultCode"] == "S0001":
-            raise PayPayLoginError(p2pcode)
+        create_p2pcode = self.session.post("https://www.paypay.ne.jp/app/v1/p2p-api/createP2PCode",headers=headers,proxies=self.proxy).json()
+        if create_p2pcode["header"]["resultCode"] == "S0001":
+            raise PayPayLoginError(create_p2pcode)
         
-        if p2pcode["header"]["resultCode"] != "S0000":
-            raise PayPayError(p2pcode)
+        if create_p2pcode["header"]["resultCode"] != "S0000":
+            raise PayPayError(create_p2pcode)
         
-        self.created_p2pcode=p2pcode["payload"]["p2pCode"]
+        class P2PCode(NamedTuple):
+            p2pcode: str
+            raw: dict
 
-        return p2pcode
+        p2pcode=create_p2pcode["payload"]["p2pCode"]
+
+        return P2PCode(p2pcode,create_p2pcode)
     
     def create_paymentcode(self,method:str="WALLET",method_id:str="106177237") -> dict:
         if not self.access_token:
@@ -276,6 +308,7 @@ class PayPay:
         
         return paymentcode
     
+    #残念ながらエンドポイントから消えてしまった
     def create_link(self,amount:int,password:str=None) -> None:
         raise PayPayError("404 Not Found")
     def send_money(self,amount:int,external_id:str) -> None:
