@@ -1,7 +1,5 @@
 # PayPayレスポンス集
-ハロー、PayPaythonのtakaです  
 PayPayで返ってくるレスポンスの例をここにまとめます  
-もしここに載っていないレスポンス受け取った方、レスポンス.jsonを添付してtakaまで連絡くれると非常に助かります！！  
 ## S0000
 ```
 {'header': {'resultCode': 'S0000', 'resultMessage': ''}
