@@ -36,41 +36,40 @@ print(paypay.client_uuid)#クライアントUUID、トークンの有効期限�
 
 link_info=paypay.link_check("https://pay.paypay.ne.jp/osuvUuLmQH8WA4kW")#送金リンク確認、URLかID = "osuvUuLmQH8WA4kW" この部分 でリクエストできる
 #or
-PayPay().link_check("https://pay.paypay.ne.jp/osuvUuLmQH8WA4kW")#link_checkはログインなしでも使うことができる
-print(paypay.link_amount)#リンクの合計金額
-print(paypay.link_money_light)#金額のマネーライト分
-print(paypay.link_money)#金額のマネー分
-print(paypay.link_has_password)#パスワードがあるなら True
-print(paypay.link_chat_room_id)#チャットルームID リンク受け取ったらメッセージ送れるあれのID
-print(paypay.link_status)#PENDING COMPLEATED REJECTED FAILED
-print(paypay.link_order_id)
-#paypay.link_nantoka で返されるのはリンクチェックしたものだけ
+link_info=PayPay().link_check("https://pay.paypay.ne.jp/osuvUuLmQH8WA4kW")#link_checkはログインなしでも使うことができる
+print(link_info)#リンクの合計金額
+print(link_info.money_light)#金額のマネーライト分
+print(link_info.money)#金額のマネー分
+print(link_info.has_password)#パスワードがあるなら True
+print(link_info.chat_room_id)#チャットルームID リンク受け取ったらメッセージ送れるあれのID
+print(link_info.status)#PENDING COMPLEATED REJECTED FAILED
+print(link_info.order_id)
 
 paypay.link_receive("ここもURL / IDどっちでもOK")#送金リンク受け取り、パスワードはpassword=str
 paypay.link_receive("ここもURL / IDどっちでもOK",link_info=link_info)#link_info=dict、これを設定するとリンクチェックをスキップする
 paypay.link_reject("ここもURL / IDどっちでもOK")#送金リンクを辞退、これもlink_infoにdictをつっこめる
 
-paypay.get_balance()#残高確認
-print(paypay.all_balance)#すべての残高
-print(paypay.useable_balance)#すべての使用可能な残高
-print(paypay.money_light)#もってるマネーライト
-print(paypay.money)#もってるマネー
-print(paypay.point)#もってるポイント
+get_balance=paypay.get_balance()#残高確認
+print(get_balance.all_balance)#すべての残高
+print(get_balance.useable_balance)#すべての使用可能な残高
+print(get_balance.money_light)#もってるマネーライト
+print(get_balance.money)#もってるマネー
+print(get_balance.points)#もってるポイント
 
-paypay.get_profile()#ユーザー情報を確認
-print(paypay.name)#ユーザー名
-print(paypay.external_user_id)#識別のためのユーザーID、自分で決められるやつとは違う
-print(paypay.icon)#アイコンのURL
+get_profile=paypay.get_profile()#ユーザー情報を確認
+print(get_profile.name)#ユーザー名
+print(get_profile.external_user_id)#識別のためのユーザーID、自分で決められるやつとは違う
+print(get_profile.icon)#アイコンのURL
 
 print(paypay.get_history())#取引履歴を確認
 
-paypay.create_p2pcode()#送金してもらうためのURLを作成する(PayPayアプリのQRコードとおなじ)
-print(paypay.created_p2pcode)#↑で作ったURL
+create_p2pcode=paypay.create_p2pcode()#送金してもらうためのURLを作成する(PayPayアプリのQRコードとおなじ)
+print(create_p2pcode.p2pcode)#↑で作ったURL
 
-paypay.create_paymentcode()#レジでスキャンする用のバーコードを生成、画像はアプリ内で処理されるからコードだけ生成してもよっぽど機材を持ってる人じゃない限り無意味、死に機能
+print(paypay.create_paymentcode())#レジでスキャンする用のバーコードを生成、画像はアプリ内で処理されるからコードだけ生成してもよっぽど機材を持ってる人じゃない限り無意味、死に機能
 
 paypay.create_link(amount=1,password="1111")#送金リンクを作成、パスワードはpassword=str...この機能は2024/3月下旬に使えなくなった (エンドポイントから削除された)
-paypay.send_money(amount=1,external_id="048f4fef00bdbad00")#指定したexternalidのユーザーに直接送金...この機能は2024/3月下旬に使えなくなった (エンドポイントから削除された)
+paypay.send_money(amount=1,external_id="048f4fef00bdbad00")#指定したexternalidのユーザーに直接送金...この機能も2024/3月下旬に使えなくなった (エンドポイントから削除された)
 ```
 #コメントで書いてあることが全部  
 よく使う返り値は変数に入れているので、レスポンス全体を確認する必要はなくなった  
@@ -88,7 +87,7 @@ paypay=PayPaython.PayPay(phone="08012345678",password="Test-1234",client_uuid="d
 ```py
 print(paypay.client_uuid)
 ```
-### アクセストークンについて
+### アクセストークン
 トークンを入力するとログインをスキップします  
 WebAPIは2時間で失効します  
 失効ならS0001かS9999が返ってきます (てきとーなものを入れるとサーバーエラーになる)  
@@ -97,11 +96,14 @@ WebAPIは2時間で失効します
 ```py
 print(paypay.access_token)
 ```
+### 古いバージョン
+PayPaythonバージョン3はモバイルAPI版と統一するためにNamedTupleを使用するよう変更しただけです  
+中身の本質的な動作はまったく変わっていません  
+古いバージョンのドキュメントはここから -> [README_old.md](https://github.com/taka-4602/PayPaython/blob/main/README_old.md)
 ## 余談
-2024/6/12に久しぶりにWebAPIのPayPaythonを更新しました (それに伴ってこのReadmeも一新)  
-pypiにはたくさんバージョンがあると思いますが、僕は最新バージョンしかサポートしないのでそこはご了承ください  
+PayPaython_mobileをアップデートしたついでにWebAPI版もアップデートしました (フォーマットを統一したかった)
 噂でWebAPIは凍結しやすいって聞いたことが何回かあるけど、僕は未確認だからそれについてはあんまり言及しません (トークンを使わずセッションを作りすぎるとなるのかもしれない)  
-それにしても、このAPIラッパーを作り始めた頃のコードは今から見るとひどく見えます...
+**WebAPI版PayPaythonはDiscontinuedです！** 僕はもうWebAPIを使ってないのでサポートできるか怪しいからです！
 ## コンタクト  
 Discord サーバー / https://discord.gg/aSyaAK7Ktm  
 Discord ユーザー名 / .taka.  
