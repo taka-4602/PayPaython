@@ -105,7 +105,7 @@ PayPaython_mobileをアップデートしたついでにWebAPI版もアップデ
 噂でWebAPIは凍結しやすいって聞いたことが何回かあるけど、僕は未確認だからそれについてはあんまり言及しません (トークンを使わずセッションを作りすぎるとなるのかもしれない)  
 **WebAPI版PayPaythonはDiscontinuedです！** 僕はもうWebAPIを使ってないのでサポートできるか怪しいからです！
 ## コンタクト  
-Discord サーバー / https://discord.gg/YdrTY2JPR2  
+Discord サーバー / https://discord.gg/g4UE3kQbmS  
 Discord ユーザー名 / .taka.  
 #### 追記
 どうやらAme-xさんによってJavaScript版がリリースされたようです  
